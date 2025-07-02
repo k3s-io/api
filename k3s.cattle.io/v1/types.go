@@ -7,6 +7,8 @@ import (
 
 // +genclient
 // +genclient:noStatus
+// +kubebuilder:printcolumn:name="Source",type=string,JSONPath=`.spec.source`
+// +kubebuilder:printcolumn:name="Checksum",type=string,JSONPath=`.spec.checksum`
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Addon is used to track application of a manifest file on disk. It mostly exists so that the wrangler DesiredSet
@@ -29,6 +31,11 @@ type AddonSpec struct {
 
 // +genclient
 // +genclient:nonNamespaced
+// +kubebuilder:printcolumn:name="SnapshotName",type=string,JSONPath=`.spec.snapshotName`
+// +kubebuilder:printcolumn:name="Node",type=string,JSONPath=`.spec.nodeName`
+// +kubebuilder:printcolumn:name="Location",type=string,JSONPath=`.spec.location`
+// +kubebuilder:printcolumn:name="Size",type=string,JSONPath=`.spec.size`
+// +kubebuilder:printcolumn:name="CreationTime",type=date,JSONPath=`.spec.creationTime`
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ETCDSnapshot tracks a point-in-time snapshot of the etcd datastore.
