@@ -31,6 +31,7 @@ type AddonSpec struct {
 
 // +genclient
 // +genclient:nonNamespaced
+// +kubebuilder:resource:scope=Cluster
 // +kubebuilder:printcolumn:name="SnapshotName",type=string,JSONPath=`.spec.snapshotName`
 // +kubebuilder:printcolumn:name="Node",type=string,JSONPath=`.spec.nodeName`
 // +kubebuilder:printcolumn:name="Location",type=string,JSONPath=`.spec.location`

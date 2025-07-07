@@ -12,7 +12,7 @@ spec:
     listKind: ETCDSnapshotFileList
     plural: etcdsnapshotfiles
     singular: etcdsnapshotfile
-  scope: Namespaced
+  scope: Cluster
   versions:
   - additionalPrinterColumns:
     - jsonPath: .spec.snapshotName
