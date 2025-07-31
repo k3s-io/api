@@ -35,8 +35,8 @@ type AddonSpec struct {
 // +kubebuilder:printcolumn:name="SnapshotName",type=string,JSONPath=`.spec.snapshotName`
 // +kubebuilder:printcolumn:name="Node",type=string,JSONPath=`.spec.nodeName`
 // +kubebuilder:printcolumn:name="Location",type=string,JSONPath=`.spec.location`
-// +kubebuilder:printcolumn:name="Size",type=string,JSONPath=`.spec.size`
-// +kubebuilder:printcolumn:name="CreationTime",type=date,JSONPath=`.spec.creationTime`
+// +kubebuilder:printcolumn:name="Size",type=string,JSONPath=`.status.size`
+// +kubebuilder:printcolumn:name="CreationTime",type=date,JSONPath=`.status.creationTime`
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ETCDSnapshot tracks a point-in-time snapshot of the etcd datastore.

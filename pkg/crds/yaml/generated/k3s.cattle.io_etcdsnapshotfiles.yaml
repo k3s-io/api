@@ -24,10 +24,10 @@ spec:
     - jsonPath: .spec.location
       name: Location
       type: string
-    - jsonPath: .spec.size
+    - jsonPath: .status.size
       name: Size
       type: string
-    - jsonPath: .spec.creationTime
+    - jsonPath: .status.creationTime
       name: CreationTime
       type: date
     name: v1
