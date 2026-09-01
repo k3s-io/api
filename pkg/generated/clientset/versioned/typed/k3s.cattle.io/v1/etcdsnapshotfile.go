@@ -19,9 +19,10 @@ limitations under the License.
 package v1
 
 import (
-	"context"
+	context "context"
 
-	v1 "github.com/k3s-io/api/k3s.cattle.io/v1"
+	k3scattleiov1 "github.com/k3s-io/api/k3s.cattle.io/v1"
+	clientsetk3scattleiov1 "github.com/k3s-io/api/pkg/generated/clientset/k3s.cattle.io/v1"
 	scheme "github.com/k3s-io/api/pkg/generated/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -37,33 +38,37 @@ type ETCDSnapshotFilesGetter interface {
 
 // ETCDSnapshotFileInterface has methods to work with ETCDSnapshotFile resources.
 type ETCDSnapshotFileInterface interface {
-	Create(ctx context.Context, eTCDSnapshotFile *v1.ETCDSnapshotFile, opts metav1.CreateOptions) (*v1.ETCDSnapshotFile, error)
-	Update(ctx context.Context, eTCDSnapshotFile *v1.ETCDSnapshotFile, opts metav1.UpdateOptions) (*v1.ETCDSnapshotFile, error)
+	Create(ctx context.Context, eTCDSnapshotFile *k3scattleiov1.ETCDSnapshotFile, opts metav1.CreateOptions) (*k3scattleiov1.ETCDSnapshotFile, error)
+	Update(ctx context.Context, eTCDSnapshotFile *k3scattleiov1.ETCDSnapshotFile, opts metav1.UpdateOptions) (*k3scattleiov1.ETCDSnapshotFile, error)
 	// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-	UpdateStatus(ctx context.Context, eTCDSnapshotFile *v1.ETCDSnapshotFile, opts metav1.UpdateOptions) (*v1.ETCDSnapshotFile, error)
+	UpdateStatus(ctx context.Context, eTCDSnapshotFile *k3scattleiov1.ETCDSnapshotFile, opts metav1.UpdateOptions) (*k3scattleiov1.ETCDSnapshotFile, error)
 	Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error
-	Get(ctx context.Context, name string, opts metav1.GetOptions) (*v1.ETCDSnapshotFile, error)
-	List(ctx context.Context, opts metav1.ListOptions) (*v1.ETCDSnapshotFileList, error)
+	Get(ctx context.Context, name string, opts metav1.GetOptions) (*k3scattleiov1.ETCDSnapshotFile, error)
+	List(ctx context.Context, opts metav1.ListOptions) (*k3scattleiov1.ETCDSnapshotFileList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
-	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ETCDSnapshotFile, err error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *k3scattleiov1.ETCDSnapshotFile, err error)
+	Apply(ctx context.Context, eTCDSnapshotFile *clientsetk3scattleiov1.ETCDSnapshotFileApplyConfiguration, opts metav1.ApplyOptions) (result *k3scattleiov1.ETCDSnapshotFile, err error)
+	// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+	ApplyStatus(ctx context.Context, eTCDSnapshotFile *clientsetk3scattleiov1.ETCDSnapshotFileApplyConfiguration, opts metav1.ApplyOptions) (result *k3scattleiov1.ETCDSnapshotFile, err error)
 	ETCDSnapshotFileExpansion
 }
 
 // eTCDSnapshotFiles implements ETCDSnapshotFileInterface
 type eTCDSnapshotFiles struct {
-	*gentype.ClientWithList[*v1.ETCDSnapshotFile, *v1.ETCDSnapshotFileList]
+	*gentype.ClientWithListAndApply[*k3scattleiov1.ETCDSnapshotFile, *k3scattleiov1.ETCDSnapshotFileList, *clientsetk3scattleiov1.ETCDSnapshotFileApplyConfiguration]
 }
 
 // newETCDSnapshotFiles returns a ETCDSnapshotFiles
 func newETCDSnapshotFiles(c *K3sV1Client) *eTCDSnapshotFiles {
 	return &eTCDSnapshotFiles{
-		gentype.NewClientWithList[*v1.ETCDSnapshotFile, *v1.ETCDSnapshotFileList](
+		gentype.NewClientWithListAndApply[*k3scattleiov1.ETCDSnapshotFile, *k3scattleiov1.ETCDSnapshotFileList, *clientsetk3scattleiov1.ETCDSnapshotFileApplyConfiguration](
 			"etcdsnapshotfiles",
 			c.RESTClient(),
 			scheme.ParameterCodec,
 			"",
-			func() *v1.ETCDSnapshotFile { return &v1.ETCDSnapshotFile{} },
-			func() *v1.ETCDSnapshotFileList { return &v1.ETCDSnapshotFileList{} }),
+			func() *k3scattleiov1.ETCDSnapshotFile { return &k3scattleiov1.ETCDSnapshotFile{} },
+			func() *k3scattleiov1.ETCDSnapshotFileList { return &k3scattleiov1.ETCDSnapshotFileList{} },
+		),
 	}
 }
