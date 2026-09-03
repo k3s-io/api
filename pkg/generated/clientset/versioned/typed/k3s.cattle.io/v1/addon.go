@@ -22,7 +22,7 @@ import (
 	context "context"
 
 	k3scattleiov1 "github.com/k3s-io/api/k3s.cattle.io/v1"
-	clientsetk3scattleiov1 "github.com/k3s-io/api/pkg/generated/clientset/k3s.cattle.io/v1"
+	applyconfigurationk3scattleiov1 "github.com/k3s-io/api/pkg/generated/applyconfiguration/k3s.cattle.io/v1"
 	scheme "github.com/k3s-io/api/pkg/generated/clientset/versioned/scheme"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -46,19 +46,19 @@ type AddonInterface interface {
 	List(ctx context.Context, opts metav1.ListOptions) (*k3scattleiov1.AddonList, error)
 	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *k3scattleiov1.Addon, err error)
-	Apply(ctx context.Context, addon *clientsetk3scattleiov1.AddonApplyConfiguration, opts metav1.ApplyOptions) (result *k3scattleiov1.Addon, err error)
+	Apply(ctx context.Context, addon *applyconfigurationk3scattleiov1.AddonApplyConfiguration, opts metav1.ApplyOptions) (result *k3scattleiov1.Addon, err error)
 	AddonExpansion
 }
 
 // addons implements AddonInterface
 type addons struct {
-	*gentype.ClientWithListAndApply[*k3scattleiov1.Addon, *k3scattleiov1.AddonList, *clientsetk3scattleiov1.AddonApplyConfiguration]
+	*gentype.ClientWithListAndApply[*k3scattleiov1.Addon, *k3scattleiov1.AddonList, *applyconfigurationk3scattleiov1.AddonApplyConfiguration]
 }
 
 // newAddons returns a Addons
 func newAddons(c *K3sV1Client, namespace string) *addons {
 	return &addons{
-		gentype.NewClientWithListAndApply[*k3scattleiov1.Addon, *k3scattleiov1.AddonList, *clientsetk3scattleiov1.AddonApplyConfiguration](
+		gentype.NewClientWithListAndApply[*k3scattleiov1.Addon, *k3scattleiov1.AddonList, *applyconfigurationk3scattleiov1.AddonApplyConfiguration](
 			"addons",
 			c.RESTClient(),
 			scheme.ParameterCodec,

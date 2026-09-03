@@ -20,7 +20,7 @@ package fake
 
 import (
 	v1 "github.com/k3s-io/api/k3s.cattle.io/v1"
-	k3scattleiov1 "github.com/k3s-io/api/pkg/generated/clientset/k3s.cattle.io/v1"
+	k3scattleiov1 "github.com/k3s-io/api/pkg/generated/applyconfiguration/k3s.cattle.io/v1"
 	typedk3scattleiov1 "github.com/k3s-io/api/pkg/generated/clientset/versioned/typed/k3s.cattle.io/v1"
 	gentype "k8s.io/client-go/gentype"
 )
