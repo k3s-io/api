@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/k3s-io/api/pkg/generated/clientset"
+	applyconfiguration "github.com/k3s-io/api/pkg/generated/applyconfiguration"
 	clientset "github.com/k3s-io/api/pkg/generated/clientset/versioned"
 	k3sv1 "github.com/k3s-io/api/pkg/generated/clientset/versioned/typed/k3s.cattle.io/v1"
 	fakek3sv1 "github.com/k3s-io/api/pkg/generated/clientset/versioned/typed/k3s.cattle.io/v1/fake"
@@ -92,7 +92,7 @@ func NewClientset(objects ...runtime.Object) *Clientset {
 	o := testing.NewFieldManagedObjectTracker(
 		scheme,
 		codecs.UniversalDecoder(),
-		clientset.NewTypeConverter(scheme),
+		applyconfiguration.NewTypeConverter(scheme),
 	)
 	for _, obj := range objects {
 		if err := o.Add(obj); err != nil {
